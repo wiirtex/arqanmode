@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "arqanmode"
+version = "0.0.6"
+description = "rebuild with poetry"
+authors = ["Timur Yakhshigulov <t.iakhshigulov@innopolis.university>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+setuptools = ">=69.2.0"
+pydantic = ">=2.5.3"
+loguru = ">=0.5.3"
+aiokafka = ">=0.10.0"
+requests = ">=2.31.0"
+redis = "^5.0.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
