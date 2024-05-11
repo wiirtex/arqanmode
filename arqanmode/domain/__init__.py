@@ -1,6 +1,8 @@
 from .model import *
+from .requirements import *
 from .scheme import *
 from .task import *
+from .transformers import *
 
 __all__ = [
     "ModelInterface",
@@ -10,5 +12,13 @@ __all__ = [
     "SchemeFieldV1",
     "TaskStatus",
     "TaskResult",
-    "GenericTask"
+    "CreateTaskRequest",
+    "GenericTask",
+    "RequirementSource",
+    "RequirementSeverity",
+    "Requirement",
+    "STIGRequirement",
+    "IEC62443Requirement",
+    "Requirements",
+    "TransformerType",
 ]
