@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any
 from uuid import UUID
 
-from arqanmode.domain.task import TaskStatus
+from arqanmode.domain.task import TaskStatus, TaskResult
 
 
 class Storage(ABC):
@@ -10,6 +10,10 @@ class Storage(ABC):
 
     @abstractmethod
     async def get_task_status(self, task_id: UUID) -> TaskStatus | None:
+        raise NotImplementedError()
+
+    @abstractmethod
+    async def get_task_result(self, task_id: UUID) -> TaskResult | None:
         raise NotImplementedError()
 
     @abstractmethod

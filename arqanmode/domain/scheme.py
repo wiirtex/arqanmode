@@ -1,18 +1,17 @@
-import enum
 import typing
+from enum import Enum
 
 import pydantic
+
+
+class SchemeFieldTypeEnum(Enum):
+    Integer = 1
+    String = 2
 
 
 class CreateTaskRequest(pydantic.BaseModel):
     data: typing.Dict
     model: str  # name of desired model
-
-
-class SchemeFieldTypeEnum(enum.StrEnum):
-    Integer = 'int'
-    String = 'str'
-    # after adding new types you need add new lines to validate_model_by_scheme function
 
 
 class SchemeFieldV1(pydantic.BaseModel):

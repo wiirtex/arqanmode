@@ -12,7 +12,6 @@ class ModelInterface(ABC):
 
         :return: interface of the Model, in format of
         """
-        raise NotImplementedError()
 
     @abstractmethod
     def parse_and_validate(self, raw_request: bytes) -> object:
@@ -20,20 +19,15 @@ class ModelInterface(ABC):
         must parse the request and should validate it to be sure,
         that input is processable
 
-        :param raw_request: bytes - valid json of possibly
-            invalid model's input in binary format
-        :return: parsed input, that will be passed as an argument to
-        model's  process_task() function
+        :param raw_request: bytes - valid json of possibly invalid model's input in binary format
+        :return: parsed input, that will be passed as an argument to model's process_task() function
         """
-        raise NotImplementedError()
 
     @abstractmethod
     async def process_task(self, input: object) -> TaskResult:
         """
         must process parsed input, should not raise validation error
 
-        :param input: parsed input,
-            returned by model's parse_and_validate() method
+        :param input: parsed input, returned by model's parse_and_validate() method
         :return: domain.TaskResult
         """
-        raise NotImplementedError()

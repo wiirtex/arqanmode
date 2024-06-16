@@ -1,3 +1,4 @@
-from .storage import Storage
+from .interface import Storage
+from .redis import RedisClient
 
-__all__ = ["Storage"]
+__all__ = ["Storage", "RedisClient"]

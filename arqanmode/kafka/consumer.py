@@ -4,7 +4,7 @@ from redis import RedisError
 
 from arqanmode.domain.model import ModelInterface
 from arqanmode.domain.task import TaskStatus, GenericTask
-from arqanmode.storage.storage import Storage
+from arqanmode.storage.interface import Storage
 from .generic_consumer import GenericConsumer
 
 
