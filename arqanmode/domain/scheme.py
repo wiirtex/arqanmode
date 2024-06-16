@@ -5,8 +5,8 @@ import pydantic
 
 
 class SchemeFieldTypeEnum(Enum):
-    Integer = 1
-    String = 2
+    Integer = "integer"
+    String = "string"
 
 
 class CreateTaskRequest(pydantic.BaseModel):

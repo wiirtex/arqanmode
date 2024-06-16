@@ -21,7 +21,7 @@ class RedisClient(Storage):
         raise RuntimeError('unexpected case')
 
     async def ping(self):
-        await self._client.ping()
+        self._client.ping()
 
     @dataclass(slots=True)
     class Config:

@@ -1,4 +1,3 @@
-import json
 import logging
 from dataclasses import dataclass
 
@@ -29,9 +28,9 @@ class ModelRegistryClient:
         assert response.json()["status"] == "ok"
 
     async def register(self, model_interface: ModelInterface):
-        print(json.dumps(model_interface.get_interface().model_json_schema()))
+        print(model_interface.get_interface().json())
         response = requests.post(self.url + "/register",
-                                 json=json.dumps(model_interface.get_interface().model_json_schema()))
+                                 json=model_interface.get_interface().json())
 
         print(response)
         assert response.status_code == 200
