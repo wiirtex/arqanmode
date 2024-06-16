@@ -1,10 +1,15 @@
 import logging
+import random
 from dataclasses import dataclass
 
+import fastapi
+import multiprocess as mp
 import requests
 import sys
+import uvicorn
 from loguru import logger
 
+from arqanmode.api import status
 from arqanmode.domain.model import ModelInterface
 from arqanmode.kafka.consumer import Consumer
 from arqanmode.kafka.generic_consumer import GenericConsumer
@@ -27,9 +32,10 @@ class ModelRegistryClient:
         assert "status" in response.json()
         assert response.json()["status"] == "ok"
 
-    async def register(self, model_interface: ModelInterface):
+    async def register(self, model_interface: ModelInterface, self_port: str):
         print(model_interface.get_interface().json())
         response = requests.post(self.url + "/register",
+                                 headers={"referrer": str(self_port)},
                                  json=model_interface.get_interface().json())
 
         print(response)
@@ -65,17 +71,25 @@ class ModelFramework:
 
         # init http server for connection with world
         # heartbeats and so on
-        self.http_server = fastapi.
+        app = fastapi.FastAPI()
+        app.include_router(status.Router().router)
+
+        self.http_port = random.randint(8001, 25000)
+        self.http_process = mp.Process(target=uvicorn.run, args=(app,), kwargs={'port': self.http_port},
+                                       daemon=True)
 
     async def process(self):
         # register model in registry
-        resp = await self.model_registry_client.register(self.model)
+        resp = await self.model_registry_client.register(self.model, self.http_port)
 
         # check connection to storage
         await self.storage.ping()
 
         # init connection to kafka
         self.kafka_consumer = Consumer(self.queue_config, self.model, self.storage)
+
+        # start http server
+        self.http_process.start()
 
         # process kafka messages
         await self.kafka_consumer.run()
@@ -85,3 +99,5 @@ class ModelFramework:
     async def stop(self):
         # unregister model in registry
         await self.model_registry_client.unregister(self.model)
+
+        self.process().close()

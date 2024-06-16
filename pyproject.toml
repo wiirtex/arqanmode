@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "arqanmode"
-version = "0.0.12rc17"
+version = "0.0.12rc27"
 description = "rebuild with poetry"
 authors = ["Timur Yakhshigulov <t.iakhshigulov@innopolis.university>"]
 readme = "README.md"
@@ -14,6 +14,8 @@ aiokafka = ">=0.10.0"
 requests = ">=2.31.0"
 redis = "^5.0.4"
 pytest = "^8.2.0"
+fastapi = "^0.111.0"
+multiprocess = "^0.70.16"
 
 
 [build-system]
