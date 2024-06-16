@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "arqanmode"
-version = "0.0.12rc11"
+version = "0.0.12rc17"
 description = "rebuild with poetry"
 authors = ["Timur Yakhshigulov <t.iakhshigulov@innopolis.university>"]
 readme = "README.md"

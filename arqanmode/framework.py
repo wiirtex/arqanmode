@@ -38,7 +38,7 @@ class ModelRegistryClient:
     async def unregister(self, model_interface: ModelInterface):
         response = requests.post(self.url + "/unregister",
                                  json={
-                                     "name": model_interface.get_interface().model_name,
+                                     "model_name": model_interface.get_interface().model_name,
                                  })
 
         assert response.status_code == 200
@@ -65,7 +65,7 @@ class ModelFramework:
 
         # init http server for connection with world
         # heartbeats and so on
-        self.http_server = None
+        self.http_server = fastapi.
 
     async def process(self):
         # register model in registry
